@@ -6,6 +6,14 @@ import Icon from '../icon';
 // import tsPropsType from './PropsType';
 import assign from 'object-assign';
 
+function dpr() {
+  if (typeof(window) === 'undefined') {
+    return 2
+  } else {
+    return (window as any).devicePixelRatio
+  }
+}
+
 ListView.RefreshControl.defaultProps = assign({}, ListView.RefreshControl.defaultProps, {
   prefixCls: 'am-refresh-control',
   icon: [
@@ -13,12 +21,12 @@ ListView.RefreshControl.defaultProps = assign({}, ListView.RefreshControl.defaul
       <Icon type="down"/><span>下拉</span>
     </div>,
     <div key="1" className="am-refresh-control-release">
-      <Icon type="left" style={{ transform: 'rotate(90deg)' }} /><span>释放</span>
+      <Icon type="left" style={{ transform: 'rotate(90deg)' }}/><span>释放</span>
     </div>,
   ],
-  loading: <Icon type="loading" />,
+  loading: <Icon type="loading"/>,
   refreshing: false,
-  distanceToRefresh: 50 / 2 * ((window as any).devicePixelRatio || 2),
+  distanceToRefresh: 50 / 2 * (dpr() || 2),
 });
 
 export default ListView.RefreshControl;
